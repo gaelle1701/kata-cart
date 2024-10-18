@@ -1,4 +1,10 @@
-package com.gc;
+package com.gc.entity;
+
+import com.gc.lib.FormatPrice;
+import com.gc.lib.RoundingUtil;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Product {
     private String name;
@@ -37,13 +43,19 @@ public class Product {
         this.tva = tva;
     }
 
-
-    public double calculateTtc() {
+    public double calculateTax() {
+        // Calcul de la TVA arrondie
+        double tvaTax = RoundingUtil.roundUp((ht * tva) / 100);
 
         // Calcul de la taxe d'importation de 5% arrondie
-        double ti = isImported ? RoundingUtil.roundUp(ht * 5/100) : 0;
+        double ti = isImported ? RoundingUtil.roundUp((ht * 5) / 100) : 0;
 
-        // Calcule de la TVA arrondie
-        return (ht + RoundingUtil.roundUp(ht * tva/100) + ti);
+        return tvaTax + ti;
+    };
+
+    public double calculateTtc() {
+        // Calcule du TTC arrondi et formater à 0.##
+        return FormatPrice.formatTtc(ht + calculateTax());
     }
+
 }
