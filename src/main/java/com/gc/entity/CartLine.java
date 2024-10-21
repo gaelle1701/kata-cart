@@ -1,6 +1,7 @@
 package com.gc.entity;
 
-import com.gc.lib.RoundingUtil;
+import com.gc.lib.FormatPrice;
+import com.gc.lib.Rounding;
 
 public class CartLine {
     private Product product;
@@ -27,11 +28,11 @@ public class CartLine {
         this.quantity = quantity;
     }
 
-    public double calculateSubTotalTtc() {
-        return product.calculateTtc() * quantity;
+    public double calculateSubTotalPrice() {
+        return product.calculatePrice() * quantity;
     }
 
     public double calculateSubTotalTax() {
-        return RoundingUtil.roundUp(product.calculateTax() * quantity);
+        return Rounding.roundUp(product.calculateTax() * quantity);
     }
 }

@@ -7,9 +7,11 @@ import com.gc.entity.Product;
 public class Main {
     public static void main(String[] args) {
 
-        Product livre = new Product("livre",12.49,10,false);
+        Product book = new Product("livre",12.49,10,false);
+        Product cd = new Product("cd",14.99,20,false);
+        Product chocolateBar = new Product("barre de chocolat",0.85,0,false);
 
-        System.out.println(livre.getHt());
-        System.out.println(livre.calculateTtc());
+        System.out.println(book.getHt());
+        System.out.println(book.calculatePrice());
     }
 }

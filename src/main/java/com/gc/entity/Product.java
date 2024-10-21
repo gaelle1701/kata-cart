@@ -1,10 +1,7 @@
 package com.gc.entity;
 
 import com.gc.lib.FormatPrice;
-import com.gc.lib.RoundingUtil;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import com.gc.lib.Rounding;
 
 public class Product {
     private String name;
@@ -45,15 +42,15 @@ public class Product {
 
     public double calculateTax() {
         // Calcul de la TVA arrondie
-        double tvaTax = RoundingUtil.roundUp((ht * tva) / 100);
+        double tvaTax = Rounding.roundUp((ht * tva) / 100);
 
         // Calcul de la taxe d'importation de 5% arrondie
-        double ti = isImported ? RoundingUtil.roundUp((ht * 5) / 100) : 0;
+        double importTax = isImported ? Rounding.roundUp((ht * 5) / 100) : 0;
 
-        return tvaTax + ti;
+        return tvaTax + importTax;
     };
 
-    public double calculateTtc() {
+    public double calculatePrice() {
         // Calcule du TTC arrondi et formater à 0.##
         return FormatPrice.formatTtc(ht + calculateTax());
     }
