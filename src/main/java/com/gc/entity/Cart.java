@@ -18,9 +18,6 @@ public class Cart {
         return cartLines;
     }
 
-    public void setCartLines(List<CartLine> cartLines) {
-        this.cartLines = cartLines;
-    }
 
     public void addProduct(Product product, int quantity) {
         this.cartLines.add(new CartLine(product, quantity));
@@ -39,6 +36,17 @@ public class Cart {
             totalCartTax += cartLine.calculateSubTotalTax();
         }
         return totalCartTax;
+    }
+
+    public void printDetailsCart() {
+        for (CartLine cartLine : this.cartLines) {
+            String taken = cartLine.getProduct().isImported ?"importé":"";
+            System.out.printf("%d %s %s à %.2f€ HT soit %.2f€ TTC.%n",
+                    cartLine.getQuantity(),
+                    cartLine.getProduct().getName(),
+                    taken,cartLine.getProduct().getHt(),
+                    cartLine.calculateSubTotalPrice());
+        }
     }
 
 }

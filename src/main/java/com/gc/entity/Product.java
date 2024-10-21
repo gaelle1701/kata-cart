@@ -20,25 +20,14 @@ public class Product {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public double getHt() {
         return ht;
-    }
-
-    public void setHt(double ht) {
-        this.ht = ht;
     }
 
     public double getTva() {
         return tva;
     }
 
-    public void setTva(double tva) {
-        this.tva = tva;
-    }
 
     public double calculateTax() {
         // Calcul de la TVA arrondie
