@@ -51,7 +51,6 @@ public class Invoice {
             System.out.println("Total: "+cart.calculateTotalPrice()+" €");
             System.out.println("_________________________________________________");
         }
-
     }
 
 }

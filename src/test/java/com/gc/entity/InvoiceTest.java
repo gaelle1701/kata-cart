@@ -1,5 +1,6 @@
 package com.gc.entity;
 
+import com.gc.Tax;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,19 +12,19 @@ class InvoiceTest {
     private Product cd;
     private Product chocolateBar;
     private Product chocolateBox;
-    private Product parfum;
+    private Product perfume;
     private Cart cart1;
     private Cart cart2;
 
     @BeforeEach
     public void setUp() {
-        book = new Product("livre",12.49,10,false);
-        cd = new Product("cd",14.99,20,false);
-        chocolateBar = new Product("barre de chocolat",0.85,0,false);
+        book = new Product("livre",12.49, Tax.BOOK,false);
+        cd = new Product("cd",14.99,Tax.OTHER,false);
+        chocolateBar = new Product("barre de chocolat",0.85,Tax.ESSENTIAL,false);
         cart1 = new Cart();
 
-        chocolateBox = new Product("chocolate box",10,0,true);
-        parfum = new Product("parfum",47.50,20,true);
+        chocolateBox = new Product("chocolate box",10,Tax.ESSENTIAL,true);
+        perfume = new Product("parfum",47.50,Tax.OTHER,true);
         cart2 = new Cart();
     }
 
@@ -36,19 +37,17 @@ class InvoiceTest {
 
         System.out.println("Product added to Cart2");
         cart2.addProduct(chocolateBox, 2);
-        cart2.addProduct(parfum, 3);
+        cart2.addProduct(perfume, 3);
     }
 
     @Test
     void testCalculateTotal() {
-        System.out.println("Product added to Cart1");
         cart1.addProduct(book, 2);
         cart1.addProduct(cd, 1);
         cart1.addProduct(chocolateBar, 3);
 
-        System.out.println("Product added to Cart2");
         cart2.addProduct(chocolateBox, 2);
-        cart2.addProduct(parfum, 3);
+        cart2.addProduct(perfume, 3);
 
         double totalCart1Price = cart1.calculateTotalPrice();
         assertEquals(48.02,totalCart1Price);
@@ -61,14 +60,12 @@ class InvoiceTest {
 
     @Test
     public void testCalculateTax() {
-        System.out.println("Product added to Cart1");
         cart1.addProduct(book, 2);
         cart1.addProduct(cd, 1);
         cart1.addProduct(chocolateBar, 3);
 
-        System.out.println("Product added to Cart2");
         cart2.addProduct(chocolateBox, 2);
-        cart2.addProduct(parfum, 3);
+        cart2.addProduct(perfume, 3);
 
         double totalCart1Taxes = cart1.calculateTotalTaxes();
         assertEquals(5.50,totalCart1Taxes);

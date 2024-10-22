@@ -1,18 +1,19 @@
 package com.gc.entity;
 
+import com.gc.Tax;
 import com.gc.lib.FormatPrice;
 import com.gc.lib.Rounding;
 
 public class Product {
+    private Tax tax;
     private String name;
     private double ht;
-    private double tva;
     boolean isImported;
 
-    public Product(String name, double ht, double tva, boolean isImported) {
+    public Product(String name, double ht, Tax tax, boolean isImported) {
         this.name = name;
         this.ht = ht;
-        this.tva = tva;
+        this.tax = tax;
         this.isImported = isImported;
     }
 
@@ -24,14 +25,14 @@ public class Product {
         return ht;
     }
 
-    public double getTva() {
-        return tva;
+    public Tax getTax() {
+        return tax;
     }
 
 
     public double calculateTax() {
         // Calcul de la TVA arrondie
-        double tvaTax = Rounding.roundUp((ht * tva) / 100);
+        double tvaTax = Rounding.roundUp((ht * tax.getTaxValue()) / 100);
 
         // Calcul de la taxe d'importation de 5% arrondie
         double importTax = isImported ? Rounding.roundUp((ht * 5) / 100) : 0;

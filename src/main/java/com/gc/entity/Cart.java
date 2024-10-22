@@ -44,7 +44,8 @@ public class Cart {
             System.out.printf("%d %s %s à %.2f€ HT soit %.2f€ TTC.%n",
                     cartLine.getQuantity(),
                     cartLine.getProduct().getName(),
-                    taken,cartLine.getProduct().getHt(),
+                    taken,
+                    FormatPrice.formatTtc(cartLine.getProduct().getHt()),
                     cartLine.calculateSubTotalPrice());
         }
     }

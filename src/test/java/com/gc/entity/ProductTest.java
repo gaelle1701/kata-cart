@@ -1,5 +1,6 @@
 package com.gc.entity;
 
+import com.gc.Tax;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +13,8 @@ class ProductTest {
 
     @BeforeEach
     public void setUp() {
-        book = new Product("livre",12.49,10,false);
-        chocolateBox = new Product("chocolate box",10,0,true);
+        book = new Product("livre",12.49, Tax.BOOK,false);
+        chocolateBox = new Product("chocolate box",10,Tax.ESSENTIAL,true);
     }
 
 
